@@ -28,9 +28,10 @@ function setInitialState(reactMixin) {
   var componentWillMount = reactMixin.componentWillMount;
 
   function applyInitialState(instance) {
-    var state = instance.state || {};
-    assign(state, getInitialState.call(instance));
-    instance.state = state;
+    if (!instance.state) {
+      instance.state = {};
+    }
+    assign(instance.state, getInitialState.call(instance));
   }
 
   if (getInitialState) {
